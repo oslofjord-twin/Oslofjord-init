@@ -6,8 +6,8 @@
 
 ## Clone and start the Dockerized parts:
 1. Clone the startup-repo: `git clone git@github.com:oslofjord-twin/Oslofjord-setup-script.git`.
-2. Clone the repo containing some test-data: `git clone git@github.com:oslofjord-twin/Oslofjord-data.git`
-3. Navigate into the folder: `cd Oslofjord-setup-script`.
+2. Navigate into the folder: `cd Oslofjord-setup-script`.
+3. Clone the repo containing some test-data: `git clone git@github.com:oslofjord-twin/Oslofjord-data.git`
 4. Initialize the git submodules: `git submodule init`.
 5. Download the git submodules: `git submodule update`.
 6. `python3 OslofjordDB/db/scripts/dataToCsv_init.py`

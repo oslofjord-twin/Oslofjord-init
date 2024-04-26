@@ -52,7 +52,7 @@ services:
     container_name: grasp
     restart: unless-stopped
     build:
-      context: ./OslofjordDB/fuseki
+      context: ./OslofjordDB/grasp
       dockerfile: Dockerfile
     ports:
     - "4000:4000"
