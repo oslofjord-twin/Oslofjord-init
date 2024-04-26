@@ -7,6 +7,3 @@
 [submodule "OslofjordRV"]
 	path = OslofjordRV
 	url = https://github.com/oslofjord-twin/OslofjordRV
-[submodule "OslofjordDB"]
-	path = OslofjordDB
-	url = https://github.com/oslofjord-twin/OslofjordDB
