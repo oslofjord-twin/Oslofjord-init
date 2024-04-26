@@ -10,7 +10,8 @@
 3. Navigate into the folder: `cd Oslofjord-setup-script`.
 4. Initialize the git submodules: `git submodule init`.
 5. Download the git submodules: `git submodule update`.
-6. 
+6. `python3 OslofjordDB/db/scripts/dataToCsv_init.py`
+7. `python3 OslofjordDB/db/scripts/dataToSQL.py`
 
 7. Start the docker containers: `docker compose up -d`.
 
