@@ -1,0 +1,93 @@
+version: '3'
+services:
+  timescale:
+    container_name: timescale
+    image: timescale/timescaledb-ha:pg16
+    restart: unless-stopped
+    user: root
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - 5432:5432
+    volumes:
+    -  db_data:/home/postgres/pgdata/data
+    - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+
+  graphql-engine:
+    container_name: hasura
+    image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
+    ports:
+    - "8080:8080"
+    depends_on:
+    - timescale
+    restart: unless-stopped
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: mylongsecretkey
+    command:
+      - graphql-engine
+      - serve
+      - --enable-console
+    healthcheck:
+      test: curl --fail http://172.17.0.1:8080/ || exit 1
+      interval: 40s
+      timeout: 15s
+      retries: 2
+
+  fuseki:
+    container_name: fuseki
+    restart: unless-stopped
+    build:
+      context: /OslofjordDB/fuseki
+      dockerfile: Dockerfile
+    ports:
+    - "3030:3030" 
+    volumes:
+    - fuseki_data:/fuseki/run/databases
+  
+  grasp:
+    container_name: grasp
+    restart: unless-stopped
+    build:
+      context: /OslofjordDB/fuseki
+      dockerfile: Dockerfile
+    ports:
+    - "4000:4000"
+    depends_on:
+      - fuseki
+      
+  init:
+    container_name: init
+    image: python:latest
+    depends_on:
+      graphql-engine:
+        condition: service_healthy
+    volumes:
+     - ./fuseki/ontology.ttl:/ontology.ttl
+     - ./db/scripts/upload_KG.py:/upload_KG.py
+     - ./db/scripts/track_tables.py:/track_tables.py
+     - ./db/scripts/add_remote_schema.py:/add_remote_schema.py
+     - ./db/scripts/create_event_trigger.py:/create_event_trigger.py
+    command: >
+      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
+
+  simulation:
+     container_name: hydrodrift
+     tty: true
+     build:
+       context: /OslofjordSM
+       dockerfile: Dockerfile
+
+  monitoring:
+    container_name: monitoring
+    tty: true
+    build:
+      context: /OslofjordRV
+      dockerfile: Dockerfile
+
+volumes:
+  db_data:
+  fuseki_data:
