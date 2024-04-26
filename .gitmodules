@@ -1,6 +1,3 @@
-[submodule "OslofjordDB"]
-	path = OslofjordDB
-	url = https://github.com/oslofjord-twin/OslofjordDB
 [submodule "OslofjordFE"]
 	path = OslofjordFE
 	url = https://github.com/oslofjord-twin/OslofjordFE
@@ -10,3 +7,6 @@
 [submodule "OslofjordRV"]
 	path = OslofjordRV
 	url = https://github.com/oslofjord-twin/OslofjordRV
+[submodule "OslofjordDB"]
+	path = OslofjordDB
+	url = https://github.com/oslofjord-twin/OslofjordDB
