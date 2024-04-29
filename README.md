@@ -22,7 +22,7 @@
 To fill the database with simulation data:
 1. Run the hydrodrift container
 ```
-docker run -it hydrodrift
+docker exec -it hydrodrift
 ```
 
 2. Navigate into the Hydrodrift folder
