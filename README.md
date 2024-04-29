@@ -20,7 +20,7 @@
 
 ## Simulation
 To fill the database with simulation data:
-1. Run the hydrodrift container
+1. Enter the shell of the hydrodrift-container:
 ```
 docker exec -it hydrodrift bash
 ```
