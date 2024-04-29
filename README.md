@@ -19,7 +19,37 @@
 1. Follow the steps in the readme here: https://github.com/oslofjord-twin/OslofjordRV
 
 ## Simulation
-TODO: Does the simulation-part need to run something that is not started in the docker-compose?
+To fill the database with simulation data:
+1. Run the hydrodrift container
+```
+docker run -it hydrodrift
+```
+
+2. Navigate into the Hydrodrift folder
+```
+cd Hydrodrift
+```
+
+3. Run the model for date of interest </br>
+Note: the chosen date requires available sensor data in the database
+
+```
+python main.py "year" "month" "day"
+```
+
+or
+
+```
+python main.py "year" "month" "day" "hour"
+```
+</br>
+
+Example:
+```
+python main.py 2024 4 10
+```
+
+Read more here: https://github.com/oslofjord-twin/OslofjordSM
 
 ## Start the front-end:
 1. Navigate into the front-end repo to start the node.js-development server: `cd OslofjordFE/oslofjord-app`.
