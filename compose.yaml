@@ -88,6 +88,21 @@ services:
       context: ./OslofjordRV
       dockerfile: Dockerfile
 
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    build:
+      context: ./OslofjordFE
+    depends_on:
+      - timescale
+      - graphql-engine
+      - fuseki
+      - simulation
+      - monitoring
+      - init
+    ports:
+    - "3000:3000" 
+
 volumes:
   db_data:
   fuseki_data:
