@@ -22,8 +22,37 @@ After a while, the application will be be available by opening the address `http
 Follow the steps in the readme here: https://github.com/oslofjord-twin/OslofjordRV
 
 ## Simulation
+To fill the database with simulation data:
+1. Enter the shell of the hydrodrift-container:
+```
+docker exec -it hydrodrift bash
+```
 
-TODO: Does the simulation-part need to run something that is not started in the docker-compose?
+2. Navigate into the Hydrodrift folder
+```
+cd Hydrodrift
+```
+
+3. Run the model for date of interest </br>
+Note: the chosen date requires available sensor data in the database
+
+```
+python main.py "year" "month" "day"
+```
+
+or
+
+```
+python main.py "year" "month" "day" "hour"
+```
+</br>
+
+Example:
+```
+python main.py 2024 4 10
+```
+
+Read more here: https://github.com/oslofjord-twin/OslofjordSM
 
 ## Updating the code
 
