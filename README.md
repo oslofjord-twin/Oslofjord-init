@@ -1,10 +1,10 @@
-# Oslofjord-twin
+# Oslofjord-init
 
 ## Installation
 
 1.  Make sure that Docker engine or Docker desktop are installed.  The command `docker -v` should print out a version number.
-2. Clone the startup-repo (this repository): `git clone --recurse-submodules git@github.com:oslofjord-twin/Oslofjord-twin.git`.
-3. Navigate into the folder: `cd Oslofjord-twin`.
+2. Clone the startup-repo (this repository): `git clone --recurse-submodules git@github.com:oslofjord-twin/Oslofjord-init.git`.
+3. Navigate into the folder: `cd Oslofjord-init`.
 4. Clone the repo containing some test-data: `git clone git@github.com:oslofjord-twin/Oslofjord-data.git`
 5. Run `python3 OslofjordDB-API/db/scripts/dataToCsv_init.py`
 6. Run `python3 OslofjordDB-API/db/scripts/dataToSQL.py`
