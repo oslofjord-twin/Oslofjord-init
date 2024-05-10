@@ -101,7 +101,9 @@ services:
       - monitoring
       - init
     ports:
-    - "3000:3000" 
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_GRAPHQL_HOST=graphql-engine
 
 volumes:
   db_data:
