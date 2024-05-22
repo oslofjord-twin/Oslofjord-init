@@ -37,7 +37,7 @@ services:
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: mylongsecretkey
-      HASUR_HOST: graphql-engine
+      HASURA_HOST: graphql-engine
       MONITORING_HOST: monitoring
       DB_HOST: timescale
       FUSEKI_HOST: fuseki
