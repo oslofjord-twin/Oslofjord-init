@@ -47,9 +47,10 @@ python main.py "year" "month" "day" "hour"
 ```
 </br>
 
-Example:
+For the data in the Oslofjord-data repository, use:
 ```
-python main.py 2024 4 10
+python main.py 2024 4 14
+python main.py 2024 4 15
 ```
 
 Read more here: https://github.com/oslofjord-twin/OslofjordSM
