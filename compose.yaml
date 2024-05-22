@@ -28,6 +28,8 @@ services:
     depends_on:
       timescale:
         condition: service_healthy
+      grasp:
+        condition: service_started
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
@@ -37,7 +39,7 @@ services:
       - serve
       - --enable-console
     healthcheck:
-      test: curl --fail http://172.17.0.1:8080/ || exit 1
+      test: curl --fail http://localhost:8080/ || exit 1
       interval: 40s
       timeout: 15s
       retries: 2
@@ -49,10 +51,10 @@ services:
       context: ./OslofjordDB-API/fuseki
       dockerfile: Dockerfile
     ports:
-    - "3030:3030" 
+    - "3030:3030"
     volumes:
     - fuseki_data:/fuseki/run/databases
-  
+
   grasp:
     container_name: grasp
     restart: unless-stopped
@@ -63,7 +65,7 @@ services:
     - "4000:4000"
     depends_on:
       - fuseki
-      
+
   init:
     container_name: init
     image: python:latest
@@ -99,12 +101,8 @@ services:
     build:
       context: ./OslofjordFE
     depends_on:
-      - timescale
-      - graphql-engine
-      - fuseki
-      - simulation
-      - monitoring
-      - init
+      graphql-engine:
+        condition: service_healthy
     ports:
       - "3000:3000"
     environment:

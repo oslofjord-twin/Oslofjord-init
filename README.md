@@ -59,3 +59,5 @@ Read more here: https://github.com/oslofjord-twin/OslofjordSM
 To get the latest version, run `git pull --recurse-submodules`.
 
 To update the submodule sources to the latest upstream version, run the following command: `git submodule update --remote --merge`, commit and push the resulting changes.
+
+To run after changing source code, use this command: `docker compose up --build`
