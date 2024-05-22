@@ -3,6 +3,7 @@ services:
   timescale:
     container_name: timescale
     image: timescale/timescaledb-ha:pg16
+    networks: [ oslofjord-twin ]
     restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
@@ -23,6 +24,7 @@ services:
   graphql-engine:
     container_name: hasura
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
+    networks: [ oslofjord-twin ]
     ports:
     - "8080:8080"
     depends_on:
@@ -46,6 +48,7 @@ services:
 
   fuseki:
     container_name: fuseki
+    networks: [ oslofjord-twin ]
     restart: unless-stopped
     build:
       context: ./OslofjordDB-API/fuseki
@@ -57,6 +60,7 @@ services:
 
   grasp:
     container_name: grasp
+    networks: [ oslofjord-twin ]
     restart: unless-stopped
     build:
       context: ./OslofjordDB-API/grasp
@@ -69,6 +73,7 @@ services:
   init:
     container_name: init
     image: python:latest
+    networks: [ oslofjord-twin ]
     depends_on:
       graphql-engine:
         condition: service_healthy
@@ -82,14 +87,16 @@ services:
       /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
 
   simulation:
-     container_name: hydrodrift
-     tty: true
-     build:
-       context: ./OslofjordSM
-       dockerfile: Dockerfile
+    container_name: hydrodrift
+    networks: [ oslofjord-twin ]
+    tty: true
+    build:
+      context: ./OslofjordSM
+      dockerfile: Dockerfile
 
   monitoring:
     container_name: monitoring
+    networks: [ oslofjord-twin ]
     tty: true
     build:
       context: ./OslofjordRV
@@ -97,6 +104,7 @@ services:
 
   frontend:
     container_name: frontend
+    networks: [ oslofjord-twin ]
     restart: unless-stopped
     build:
       context: ./OslofjordFE
@@ -111,3 +119,7 @@ services:
 volumes:
   db_data:
   fuseki_data:
+
+networks:
+  oslofjord-twin:
+    name: oslofjord-twin
