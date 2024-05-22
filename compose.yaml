@@ -104,6 +104,8 @@ services:
     build:
       context: ./OslofjordRV
       dockerfile: Dockerfile
+    environment:
+      HASURA_HOST: graphql-engine
 
   frontend:
     container_name: frontend
