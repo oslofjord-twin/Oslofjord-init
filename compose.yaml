@@ -1,4 +1,5 @@
 version: '3'
+name: oslofjord-twin
 services:
   timescale:
     container_name: timescale
@@ -93,6 +94,8 @@ services:
     build:
       context: ./OslofjordSM
       dockerfile: Dockerfile
+    environment:
+      HASURA_HOST: graphql-engine
 
   monitoring:
     container_name: monitoring
@@ -114,7 +117,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_GRAPHQL_HOST=graphql-engine
+      NEXT_PUBLIC_GRAPHQL_HOST: graphql-engine
 
 volumes:
   db_data:
