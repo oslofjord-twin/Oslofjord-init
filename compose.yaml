@@ -91,6 +91,12 @@ services:
      - ./OslofjordDB-API/db/scripts/create_event_trigger.py:/create_event_trigger.py
     command: >
       /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
+    environment:
+      HASURA_HOST: graphql-engine
+      FUSEKI_HOST: fuseki
+      DB_HOST: timescale
+      GRASP_HOST: grasp
+      MONITORING_HOST: monitoring
 
   simulation:
     container_name: hydrodrift
