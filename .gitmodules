@@ -10,3 +10,6 @@
 [submodule "OslofjordDB-API"]
 	path = OslofjordDB-API
 	url = https://github.com/oslofjord-twin/OslofjordDB-API
+[submodule "Oslofjord-oxygen"]
+	path = Oslofjord-oxygen
+	url = git@github.com:oslofjord-twin/Oslofjord-oxygen.git
