@@ -51,8 +51,7 @@ python main.py "year" "month" "day" "hour"
 
 For the data in the Oslofjord-data repository, use:
 ```
-python main.py 2024 4 14
-python main.py 2024 4 15
+python main.py 2024 4 16
 ```
 
 Read more here: https://github.com/oslofjord-twin/OslofjordSM
